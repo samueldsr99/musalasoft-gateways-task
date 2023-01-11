@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Gateway {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  serialNumber String @unique
+  name String
+  address String
+  devices Device[]
+}
+
+model Device {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  uuid String @unique @default(uuid())
+  vendor String
+  createdAt DateTime @default(now())
+  status String
+  gatewayId String @db.ObjectId
+  gatewat Gateway @relation(fields: [gatewayId], references: [id])
+}

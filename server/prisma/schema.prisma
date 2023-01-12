@@ -22,5 +22,5 @@ model Device {
   createdAt DateTime @default(now())
   status String
   gatewayId String @db.ObjectId
-  gatewat Gateway @relation(fields: [gatewayId], references: [id])
+  gateway Gateway @relation(fields: [gatewayId], references: [id])
 }

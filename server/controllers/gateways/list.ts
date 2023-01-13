@@ -4,9 +4,8 @@ import prisma from "../../config/prisma";
 
 export default async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    return res.json({
-      data: await prisma.gateway.findMany(),
-    });
+    const gateways = await prisma.gateway.findMany();
+    return res.json(gateways);
   } catch (err) {
     console.error(err);
     return next(err);

@@ -11,6 +11,7 @@ import {
 
 import Input from "@/components/atom/input";
 import type { Gateway } from "@/lib/types/gateway";
+import { useListGateways } from "@/hooks/useListGateways";
 
 type IconButtonProps = JSX.IntrinsicElements["button"] & {
   variant?: "error" | "success" | "info";
@@ -41,20 +42,7 @@ const IconButton: React.FC<IconButtonProps> = ({
 };
 
 const Gateways: React.FC = () => {
-  const gateways = [
-    {
-      id: "278sdc-2398-92873",
-      name: "Gateway 1",
-      address: "192.168.43.1",
-      devices: [],
-    },
-    {
-      id: "x7y6d3-2398-92873",
-      name: "Gateway 2",
-      address: "192.168.43.9",
-      devices: [],
-    },
-  ] satisfies Gateway[];
+  const { data: gateways } = useListGateways();
   const [selected, setSelected] = useState<{
     gateway: Gateway;
     action: "delete" | "edit";
@@ -81,6 +69,7 @@ const Gateways: React.FC = () => {
   );
 
   const handleCancelDelete = useCallback(() => setSelected(null), []);
+  console.log({ gateways });
 
   return (
     <div className="px-8 py-4">
@@ -113,7 +102,7 @@ const Gateways: React.FC = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {gateways.map((gateway) => (
+            {gateways?.map((gateway) => (
               <tr key={gateway.id}>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                   {gateway.id}

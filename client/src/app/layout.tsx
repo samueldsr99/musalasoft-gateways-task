@@ -1,6 +1,7 @@
 import React from "react";
 
 import Navbar from "@/components/navbar";
+import ReactQueryWrapper from "./react-query-wrapper";
 
 import "@/styles/globals.css";
 
@@ -9,8 +10,10 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
     <html>
       <head />
       <body>
-        <Navbar />
-        {children}
+        <ReactQueryWrapper>
+          <Navbar />
+          {children}
+        </ReactQueryWrapper>
       </body>
     </html>
   );

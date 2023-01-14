@@ -18,6 +18,7 @@ type IconButtonProps = JSX.IntrinsicElements["button"] & {
 };
 
 const iconClasses = clsx.bind({
+  root: "rounded-lg p-1 text-gray-100 outline-none transition-all hover:shadow-xl active:opacity-90 duration-300",
   error: "bg-red-500 hover:bg-red-600 active:bg-red-700",
   info: "bg-blue-500 hover:bg-blue-600 active:bg-blue-700",
   success: "bg-green-500 hover:bg-green-600 active:bg-green-700",
@@ -34,7 +35,7 @@ const IconButton: React.FC<IconButtonProps> = ({
     <button
       disabled={submitting}
       className={iconClasses(
-        "rounded-lg p-1 text-gray-100 outline-none",
+        "root",
         variant,
         submitting && "animate-pulse opacity-20"
       )}

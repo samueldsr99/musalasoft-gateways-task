@@ -15,7 +15,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ title, children }) => {
         <Typography as="h1" size="4xl" className="text-center md:text-left">
           {title}
         </Typography>
-        {children}
+        <div className="mt-8">{children}</div>
       </main>
     </>
   );

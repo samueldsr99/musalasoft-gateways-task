@@ -5,6 +5,7 @@ import { useDeleteGateway } from "@/hooks/useDeleteGateway";
 import { useListGateways } from "@/hooks/useListGateways";
 import GatewaysTable from "./_gateways-table";
 import BaseLayout from "@/layouts/base";
+import { useState } from "react";
 
 const Gateways: React.FC = () => {
   const { data: gateways } = useListGateways();

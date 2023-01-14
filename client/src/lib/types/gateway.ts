@@ -21,4 +21,4 @@ export const createGatewaySchema = z.object({
 
 export type Gateway = z.infer<typeof gatewaySchema>;
 
-export type CreateGateway = z.infer<typeof createGatewaySchema>;
+export type CreateGatewayRequest = z.infer<typeof createGatewaySchema>;

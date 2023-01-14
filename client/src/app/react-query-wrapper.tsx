@@ -1,8 +1,7 @@
 "use client";
+import queryClient from "@/lib/config/query-client";
 import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-
-const queryClient = new QueryClient();
+import { QueryClientProvider } from "react-query";
 
 const ReactQueryWrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

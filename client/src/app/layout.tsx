@@ -11,8 +11,10 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <head />
       <body>
         <ReactQueryWrapper>
-          <Navbar />
-          {children}
+          <header>
+            <Navbar />
+          </header>
+          <main className="container mx-auto max-w-7xl">{children}</main>
         </ReactQueryWrapper>
       </body>
     </html>

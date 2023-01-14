@@ -4,4 +4,4 @@ import querykeys from "@/querykeys";
 import { listGateways } from "@/lib/api/gateway";
 
 export const useListGateways = () =>
-  useQuery([querykeys.listGateways()], () => listGateways());
+  useQuery(querykeys.listGateways(), () => listGateways());

@@ -37,20 +37,24 @@ const Typography: React.FC<TypographyProps> = ({
   as = "span",
   align = "left",
   weight = "base",
-  size,
+  size = "md",
   className,
   children,
 }) => {
   const CustomTag = as as keyof JSX.IntrinsicElements;
+
+  const alignValue = `align-${align}`;
+  const fontValue = `font-${weight}`;
+  const textSize = `text-${size}`;
 
   return (
     <CustomTag
       className={classes(
         "root",
         as,
-        `align-${align}`,
-        `font-${weight}`,
-        size && `text-${size}`,
+        alignValue,
+        fontValue,
+        size && textSize,
         className
       )}
     >

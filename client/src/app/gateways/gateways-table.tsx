@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 import clsx from "classnames/bind";
 
-import Spinner from "@/components/atom/spinner";
 import Input from "@/components/atom/input";
 import type { Gateway } from "@/lib/types/gateway";
 

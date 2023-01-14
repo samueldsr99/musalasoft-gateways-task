@@ -38,8 +38,8 @@ const DeviceCard: React.FC<DeviceCardProps> = ({
   };
 
   return (
-    <div className="w-full rounded-lg border px-4 py-2.5">
-      <div className="flex items-center justify-between">
+    <div className="w-full cursor-pointer rounded-lg border px-4 py-2.5 transition-shadow duration-200 hover:shadow-md">
+      <div className="flex items-center justify-between gap-4">
         {isEditing ? (
           <Input
             placeholder="Vendor"
@@ -50,10 +50,13 @@ const DeviceCard: React.FC<DeviceCardProps> = ({
           <Typography as="p">{device?.vendor}</Typography>
         )}
         {isEditing ? (
-          <Toggle
-            checked={device?.status === "online"}
-            onChange={handleChangeStatus}
-          />
+          <div>
+            <h1 className="text-sm text-gray-400">Status</h1>
+            <Toggle
+              checked={device?.status === "online"}
+              onChange={handleChangeStatus}
+            />
+          </div>
         ) : (
           <Toggle checked={status === "online"} />
         )}

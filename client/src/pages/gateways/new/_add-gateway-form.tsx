@@ -5,6 +5,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import Typography from "@/components/atom/typography";
 import IconButton from "@/components/icon-button";
 import DeviceCard from "@/components/device-card";
 import Label from "@/components/atom/label";
@@ -46,6 +47,9 @@ const AddGatewayForm = () => {
     <form className="mx-auto max-w-4xl" onSubmit={handleSubmit(onSubmit)}>
       <div className="shadow sm:overflow-hidden sm:rounded-md">
         <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+          <Typography as="h2" size="xl">
+            Details
+          </Typography>
           <FormControl>
             <Label htmlFor="serialNumber">Serial Number</Label>
             <Controller
@@ -89,7 +93,10 @@ const AddGatewayForm = () => {
               <ErrorMessage>{errors.address.message}</ErrorMessage>
             )}
           </FormControl>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col gap-2">
+            <Typography as="h2" size="xl">
+              Devices
+            </Typography>
             {fields.map((field, index) => (
               <Controller
                 key={field.id}

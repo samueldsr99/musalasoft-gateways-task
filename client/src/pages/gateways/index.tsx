@@ -1,34 +1,26 @@
-"use client";
+import Link from "next/link";
 
 import Button from "@/components/atom/button/button";
-import Typography from "@/components/atom/typography";
 import { useDeleteGateway } from "@/hooks/useDeleteGateway";
 import { useListGateways } from "@/hooks/useListGateways";
-import Link from "next/link";
-import GatewaysTable from "./gateways-table";
+import GatewaysTable from "./_gateways-table";
+import BaseLayout from "@/layouts/base";
 
 const Gateways: React.FC = () => {
   const { data: gateways } = useListGateways();
   const { mutateAsync: deleteGateway } = useDeleteGateway();
 
   return (
-    <div className="p-4 md:p-8">
-      <div className="flex justify-between">
-        <Typography
-          as="h1"
-          weight="semibold"
-          className="text-center md:text-left"
-        >
-          Gateways
-        </Typography>
+    <BaseLayout title="Gateways">
+      <div className="flex justify-end">
         <Link href="/gateways/new">
           <Button>New</Button>
         </Link>
       </div>
-      <div className="mt-10 overflow-y-hidden overflow-x-scroll">
+      <div className="mt-2 overflow-y-hidden overflow-x-scroll">
         <GatewaysTable gateways={gateways} onDelete={deleteGateway} />
       </div>
-    </div>
+    </BaseLayout>
   );
 };
 

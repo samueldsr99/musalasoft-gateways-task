@@ -1,4 +1,4 @@
-import AddGatewayForm from "./add-gateway-form";
+import AddGatewayForm from "./_add-gateway-form";
 
 const NewGateway = () => {
   return (

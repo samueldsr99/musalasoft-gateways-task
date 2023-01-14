@@ -27,3 +27,9 @@ export const badRequest = (res: Response, body: Object) =>
     code: HttpCode.BAD_REQUEST,
     ...body,
   });
+
+export const internalServerError = (res: Response, body: Object) =>
+  res.status(HttpCode.INTERNAL_SERVER_ERROR).json({
+    code: HttpCode.INTERNAL_SERVER_ERROR,
+    ...body,
+  });

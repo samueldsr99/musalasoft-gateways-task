@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.8.1",
+    "@types/morgan": "^1.9.4",
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "prisma": "^4.8.1",
     "zod": "^3.20.2"

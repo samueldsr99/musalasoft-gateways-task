@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import morgan from "morgan";
 
 // Routes
 import gatewaysRoutes from "./routes/gateways";
@@ -16,6 +17,7 @@ const port = Number(process.env.PORT) | 3001;
 
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
 
 app.get("/", (_req, res) => res.send("Express + Typescript Server"));
 

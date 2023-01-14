@@ -1,25 +1,21 @@
-"use client";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
+import IconButton from "@/components/icon-button";
+import DeviceCard from "@/components/device-card";
 import Label from "@/components/atom/label";
 import Button from "@/components/atom/button";
 import Input from "@/components/atom/input/input";
 import FormControl from "@/components/atom/form-control";
 import { useCreateGateway } from "@/hooks/useCreateGateway";
-import type { Device } from "@/lib/types/device";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import type { CreateGatewayRequest } from "@/lib/types/gateway";
 import { createGatewaySchema } from "@/lib/types/gateway";
-import React from "react";
 
-type FormProps = {
-  name: string;
-  address: string;
-  serialNumber: string;
-  devices: Device[];
-};
+type FormProps = CreateGatewayRequest;
 
 const ErrorMessage = ({ children }: { children: React.ReactNode }) => (
   <p className="text-sm text-red-500">{children}</p>
@@ -33,6 +29,11 @@ const AddGatewayForm = () => {
   } = useForm<FormProps>({
     resolver: zodResolver(createGatewaySchema),
   });
+  const { fields, append, remove } = useFieldArray({
+    name: "devices",
+    control,
+  });
+
   const { mutateAsync } = useCreateGateway();
   const router = useRouter();
 
@@ -88,6 +89,28 @@ const AddGatewayForm = () => {
               <ErrorMessage>{errors.address.message}</ErrorMessage>
             )}
           </FormControl>
+          <div className="mt-8">
+            {fields.map((field, index) => (
+              <Controller
+                key={field.id}
+                name={`devices.${index}`}
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <div className="flex items-center gap-2">
+                    <DeviceCard isEditing device={value} onChange={onChange} />
+                    <IconButton variant="error" onClick={() => remove(index)}>
+                      <TrashIcon className="w-h-7 h-7" />
+                    </IconButton>
+                  </div>
+                )}
+              />
+            ))}
+            <div className="mt-4 text-right">
+              <Button onClick={() => append({ status: "offline", vendor: "" })}>
+                Add more
+              </Button>
+            </div>
+          </div>
         </div>
         <div className="flex justify-end gap-4 bg-gray-50 px-4 py-3 sm:px-6">
           <Link href="/gateways">

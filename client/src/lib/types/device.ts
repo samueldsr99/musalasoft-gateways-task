@@ -11,4 +11,11 @@ export const deviceSchema = z.object({
   createdAt: z.date(),
 });
 
+export const createDeviceSchema = z.object({
+  vendor: z.string().min(1),
+  status: deviceStatusSchema,
+});
+
 export type Device = z.infer<typeof deviceSchema>;
+
+export type CreateDevice = z.infer<typeof createDeviceSchema>;

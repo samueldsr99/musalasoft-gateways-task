@@ -7,44 +7,10 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import clsx from "classnames/bind";
 
+import IconButton from "@/components/icon-button";
 import Input from "@/components/atom/input";
 import type { Gateway } from "@/lib/types/gateway";
-
-type IconButtonProps = JSX.IntrinsicElements["button"] & {
-  variant?: "error" | "success" | "info" | "warning";
-  submitting?: boolean;
-};
-
-const iconClasses = clsx.bind({
-  root: "rounded-lg p-1 text-gray-100 outline-none transition-all hover:shadow-xl active:opacity-90 duration-300",
-  error: "bg-red-500 hover:bg-red-600 active:bg-red-700",
-  info: "bg-blue-500 hover:bg-blue-600 active:bg-blue-700",
-  success: "bg-green-500 hover:bg-green-600 active:bg-green-700",
-  warning: "bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700",
-});
-
-const IconButton: React.FC<IconButtonProps> = ({
-  children,
-  variant,
-  submitting = false,
-  ...props
-}) => {
-  return (
-    <button
-      disabled={submitting}
-      className={iconClasses(
-        "root",
-        variant,
-        submitting && "animate-pulse opacity-20"
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
 
 export type GatewaysTableProps = {
   gateways?: Gateway[];

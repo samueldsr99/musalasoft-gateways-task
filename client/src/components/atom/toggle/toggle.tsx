@@ -3,13 +3,19 @@ import clsx from "classnames";
 
 export type ToggleProps = {
   checked?: boolean;
+  defaultChecked?: boolean;
   onChange?(newVal: boolean): void;
 };
 
-const Toggle: React.FC<ToggleProps> = ({ checked = false, onChange }) => {
+const Toggle: React.FC<ToggleProps> = ({
+  checked = false,
+  defaultChecked = false,
+  onChange,
+}) => {
   return (
     <Switch
       checked={checked}
+      defaultChecked={defaultChecked}
       onChange={onChange}
       className={clsx(
         checked ? "bg-green-600" : "bg-gray-200",

@@ -1,4 +1,4 @@
-import { deviceSchema } from "./device";
+import { createDeviceSchema, deviceSchema } from "./device";
 import { z } from "zod";
 import { IPV4_ADDRESS_REGEX } from "../utils";
 
@@ -16,7 +16,7 @@ export const createGatewaySchema = z.object({
   serialNumber: z.string().optional(),
   name: z.string().min(1),
   address: ipv4Schema,
-  devices: z.array(deviceSchema).default([]),
+  devices: z.array(createDeviceSchema).default([]),
 });
 
 export type Gateway = z.infer<typeof gatewaySchema>;

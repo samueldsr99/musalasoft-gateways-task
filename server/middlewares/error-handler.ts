@@ -1,9 +1,11 @@
 import { ErrorRequestHandler } from "express";
+import { internalServerError } from "../responses";
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-  return res.json({
+  console.error(err);
+  return internalServerError(res, {
     code: 500,
-    message: "SERVER ERROR",
+    message: "INTERNAL SERVER ERROR",
   });
 };
 

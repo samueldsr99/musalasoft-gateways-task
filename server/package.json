@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "npx tsc -w & nodemon dist/index.js",
+    "deploy": "vercel deploy --prod",
+    "dev": "vercel dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +23,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "prisma": "^4.8.1",
+    "vercel": "^28.12.4",
     "zod": "^3.20.2"
   },
   "devDependencies": {

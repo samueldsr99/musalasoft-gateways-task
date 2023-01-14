@@ -13,7 +13,7 @@ export const gatewaySchema = z.object({
 
 export const createGatewaySchema = z.object({
   body: z.object({
-    serialNumber: z.string(),
+    serialNumber: z.string().optional(),
     name: z.string(),
     address: ipv4Schema,
     devices: z.array(deviceSchema).default([]),

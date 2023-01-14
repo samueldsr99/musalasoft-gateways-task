@@ -9,7 +9,7 @@ datasource db {
 
 model Gateway {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  serialNumber String @unique
+  serialNumber String @unique @default(uuid())
   name String
   address String
   devices Device[]

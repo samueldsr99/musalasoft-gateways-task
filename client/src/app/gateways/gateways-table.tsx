@@ -142,7 +142,7 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
         {gateways?.map((gateway) => (
           <tr key={gateway.id}>
             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-              {isEditing(gateway) ? <Input /> : gateway.id}
+              {isEditing(gateway) ? <Input /> : gateway.serialNumber}
             </td>
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
               {isEditing(gateway) ? <Input /> : gateway.name}

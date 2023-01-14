@@ -9,11 +9,19 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     const {
       body: { serialNumber, address, name, devices },
     } = await zParse(createGatewaySchema, req);
-    console.log({ serialNumber, address, name, devices });
+
+    console.log({
+      ...(serialNumber && { serialNumber }),
+      name,
+      address,
+      devices: {
+        create: devices,
+      },
+    });
 
     const gateway = await prisma.gateway.create({
       data: {
-        serialNumber,
+        ...(serialNumber && { serialNumber }),
         name,
         address,
         devices: {

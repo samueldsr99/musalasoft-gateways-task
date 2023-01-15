@@ -63,7 +63,14 @@ const GatewayDetails: NextPage<GatewayDetailsProps> = ({ serialNumber }) => {
       <div className="mx-auto max-w-4xl overflow-x-scroll">
         <TabsSection tab={tab as "1" | "2"} gateway={gateway} />
         <div className="">
-          {tab === "1" ? <DetailsTab gateway={gateway} /> : <DevicesTab />}
+          {tab === "1" ? (
+            <DetailsTab gateway={gateway} />
+          ) : (
+            <DevicesTab
+              devices={gateway.devices}
+              gatewaySerialNumber={gateway.serialNumber}
+            />
+          )}
         </div>
       </div>
     </BaseLayout>

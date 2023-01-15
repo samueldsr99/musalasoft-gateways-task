@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import Typography from "@/components/atom/typography";
 import IconButton from "@/components/icon-button";
-import DeviceCard from "@/components/device-card";
+import DeviceInput from "@/components/device-input";
 import Label from "@/components/atom/label";
 import Button from "@/components/atom/button";
 import Input from "@/components/atom/input/input";
@@ -128,7 +128,7 @@ const AddGatewayForm = () => {
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <div className="flex items-center gap-2">
-                    <DeviceCard
+                    <DeviceInput
                       isEditing
                       device={value}
                       onChange={onChange}

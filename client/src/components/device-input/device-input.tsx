@@ -4,14 +4,14 @@ import Typography from "@/components/atom/typography";
 import Toggle from "@/components/atom/toggle/toggle";
 import type { ChangeEvent } from "react";
 
-export type DeviceCardProps = {
+export type DeviceInputProps = {
   device?: Partial<Device>;
   isEditing?: boolean;
   vendorError?: string;
   onChange?(newDevice: Partial<Device>): void;
 };
 
-const DeviceCard: React.FC<DeviceCardProps> = ({
+const DeviceInput: React.FC<DeviceInputProps> = ({
   device,
   vendorError,
   isEditing = false,
@@ -71,4 +71,4 @@ const DeviceCard: React.FC<DeviceCardProps> = ({
   );
 };
 
-export default DeviceCard;
+export default DeviceInput;

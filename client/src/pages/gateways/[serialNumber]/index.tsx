@@ -48,6 +48,12 @@ const GatewayDetails: NextPage<GatewayDetailsProps> = ({ serialNumber }) => {
           </dl>
         </div>
       </div>
+
+      <div className="">
+        {gateway?.devices?.map((device) => (
+          <div key={device.uuid}>A device</div>
+        ))}
+      </div>
     </BaseLayout>
   );
 };

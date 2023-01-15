@@ -39,13 +39,15 @@ const DeviceInput: React.FC<DeviceInputProps> = ({
   return (
     <div className="w-full rounded-md border border-gray-500 px-4 py-3.5">
       <div className="flex items-center justify-between gap-4">
-        <Input
-          placeholder="vendor"
-          value={device?.vendor ?? ""}
-          onChange={handleChangeVendor}
-          isError={!!vendorError}
-        />
-        <p className="text-sm text-red-500">{vendorError}</p>
+        <div>
+          <Input
+            placeholder="vendor"
+            value={device?.vendor ?? ""}
+            onChange={handleChangeVendor}
+            isError={!!vendorError}
+          />
+          <p className="text-sm text-red-500">{vendorError}</p>
+        </div>
         <div className="flex flex-col gap-1">
           <h1 className="text-xs text-gray-200">Status</h1>
           <Toggle

@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +12,8 @@ import DeviceInput from "@/components/device-input";
 import IconButton from "@/components/icon-button/icon-button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useCreateDeviceBulk } from "@/hooks/useCreateDeviceBulk";
+import ConfirmationModal from "@/components/confirmation-modal";
+import { useDeleteDevice } from "@/hooks/useDeleteDevice";
 
 export type DevicesTabProps = {
   devices: Device[];
@@ -39,13 +42,13 @@ const AddDevicesForm: React.FC<AddDevicesFormProps> = ({
     name: "devices",
     control: control,
   });
-  const { mutateAsync } = useCreateDeviceBulk();
+  const { mutateAsync, isLoading } = useCreateDeviceBulk();
 
   const onSubmit: SubmitHandler<CreateDeviceBulkProps> = async (data) => {
     await mutateAsync({
       gatewaySerialNumber,
       devices: data,
-    });
+    }).then(() => remove());
   };
 
   return (
@@ -74,9 +77,13 @@ const AddDevicesForm: React.FC<AddDevicesFormProps> = ({
           )}
         />
       ))}
-      <div className="text-right">
-        <Button type="submit">Submit</Button>
-      </div>
+      {fields.length > 0 ? (
+        <div className="text-right">
+          <Button type="submit" isLoading={isLoading} disabled={isLoading}>
+            Submit
+          </Button>
+        </div>
+      ) : null}
       {currentDevicesAmount + fields.length < 10 ? (
         <AddMoreButton
           onClick={() =>
@@ -97,12 +104,29 @@ const DevicesTab: React.FC<DevicesTabProps> = ({
   devices,
   gatewaySerialNumber,
 }) => {
+  const [selected, setSelected] = useState<Device | null>(null);
+  const { mutateAsync, isLoading } = useDeleteDevice();
+
+  const handleSelect = useCallback(
+    (device: Device) => () => setSelected(device),
+    []
+  );
+
+  const handleDeselect = useCallback(() => setSelected(null), []);
+
+  const handleDeleteDevice = useCallback(async () => {
+    if (selected) {
+      await mutateAsync({ gatewaySerialNumber, uuid: selected.uuid });
+      handleDeselect();
+    }
+  }, [gatewaySerialNumber, mutateAsync, selected, handleDeselect]);
+
   return (
     <div className="space-y-6">
       {devices.map((device) => (
         <div key={device.uuid} className="flex items-center gap-2">
           <DeviceCard device={device} />
-          <IconButton variant="error">
+          <IconButton variant="error" onClick={handleSelect(device)}>
             <TrashIcon className="h-6 w-6" />
           </IconButton>
         </div>
@@ -111,7 +135,21 @@ const DevicesTab: React.FC<DevicesTabProps> = ({
         currentDevicesAmount={devices.length}
         gatewaySerialNumber={gatewaySerialNumber}
       />
-      <div></div>
+      <ConfirmationModal
+        open={!!selected?.vendor}
+        submitting={isLoading}
+        onClose={handleDeselect}
+        onCancel={handleDeselect}
+        onConfirm={handleDeleteDevice}
+        title="Delete device"
+        content={
+          <>
+            Are you sure you want to delete{" "}
+            <span className="text-sm font-bold">{selected?.vendor}</span>? This
+            action cannot be undone
+          </>
+        }
+      />
     </div>
   );
 };

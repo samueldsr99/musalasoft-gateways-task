@@ -9,6 +9,7 @@ import devicesRoutes from "./routes/devices";
 
 // Middlewares
 import errorHandler from "./middlewares/error-handler";
+import { notFound } from "./responses";
 
 dotenv.config();
 
@@ -21,15 +22,15 @@ app.use(morgan("dev"));
 
 app.get("/", (_req, res) => res.send("Express + Typescript Server"));
 
-app.use("/gateways", gatewaysRoutes);
 app.use("/gateways/:serialNumber/devices", devicesRoutes);
+app.use("/gateways", gatewaysRoutes);
 
 app.get("/error", () => {
   throw new Error("Mock error");
 });
 
-app.use(() => {
-  throw new Error("Route was not found");
+app.use((_req, res) => {
+  return notFound(res, "Route was not found");
 });
 
 app.use(errorHandler);

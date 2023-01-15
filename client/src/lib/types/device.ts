@@ -25,6 +25,11 @@ export const createDeviceBulkRequestSchema = z.object({
   devices: createDeviceBulkSchema,
 });
 
+export const deleteDeviceRequestSchema = z.object({
+  gatewaySerialNumber: z.string(),
+  uuid: z.string(),
+});
+
 export type Device = z.infer<typeof deviceSchema>;
 
 export type CreateDevice = z.infer<typeof createDeviceSchema>;
@@ -34,3 +39,5 @@ export type CreateDeviceBulk = z.infer<typeof createDeviceBulkSchema>;
 export type CreateDeviceBulkRequest = z.infer<
   typeof createDeviceBulkRequestSchema
 >;
+
+export type DeleteDeviceRequest = z.infer<typeof deleteDeviceRequestSchema>;

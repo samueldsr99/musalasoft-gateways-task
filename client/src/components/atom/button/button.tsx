@@ -4,7 +4,7 @@ import clsx from "classnames/bind";
 import Spinner from "@/components/atom/spinner";
 
 export type ButtonProps = JSX.IntrinsicElements["button"] & {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "error";
   size?: "sm" | "md" | "lg" | "xl";
   submit?: boolean;
   isLoading?: boolean;
@@ -16,6 +16,7 @@ const classes = clsx.bind({
   animated: "transition-shadow hover:shadow-xl active:opacity-90",
   primary: "text-slate-100 bg-zinc-800 border border-zinc-600",
   secondary: "text-slate-900 bg-zinc-300",
+  error: "text-slate-100 bg-red-600",
   disabled: "opacity-70",
   sm: "py-1 px-2",
   md: "py-2 px-4",

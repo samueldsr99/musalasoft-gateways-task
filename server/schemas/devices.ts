@@ -16,9 +16,22 @@ export const createDeviceSchema = z.object({
     serialNumber: z.string(),
   }),
   body: z.object({
-    uuid: z.string(),
     vendor: z.string(),
     status: deviceStatusSchema,
+  }),
+});
+
+export const createDeviceBulkSchema = z.object({
+  params: z.object({
+    serialNumber: z.string(),
+  }),
+  body: z.object({
+    devices: z.array(
+      z.object({
+        vendor: z.string(),
+        status: deviceStatusSchema,
+      })
+    ),
   }),
 });
 

@@ -5,7 +5,7 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err);
   return internalServerError(res, {
     code: 500,
-    message: "INTERNAL SERVER ERROR",
+    message: "Internal server error",
   });
 };
 

@@ -41,6 +41,7 @@ const DeviceInput: React.FC<DeviceInputProps> = ({
       <div className="flex items-center justify-between gap-4">
         <div>
           <Input
+            sz="sm"
             placeholder="vendor"
             value={device?.vendor ?? ""}
             onChange={handleChangeVendor}

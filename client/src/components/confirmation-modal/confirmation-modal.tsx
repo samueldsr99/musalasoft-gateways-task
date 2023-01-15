@@ -51,7 +51,6 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
-
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
@@ -83,21 +82,25 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <div className="mt-5 flex flex-col gap-2 sm:mt-4 sm:flex-row sm:flex-row-reverse">
                   <Button
+                    className="w-full sm:w-auto"
                     type="button"
                     variant="error"
                     onClick={onConfirm}
                     disabled={submitting}
                     isLoading={submitting}
+                    textCentered
                   >
-                    Confirm
+                    <span>Confirm</span>
                   </Button>
                   <Button
+                    className="w-full sm:w-auto"
                     type="button"
                     variant="secondary"
                     onClick={onCancel}
                     ref={cancelButtonRef}
+                    textCentered
                   >
                     Cancel
                   </Button>

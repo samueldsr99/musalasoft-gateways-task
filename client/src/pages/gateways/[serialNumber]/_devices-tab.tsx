@@ -16,7 +16,7 @@ import ConfirmationModal from "@/components/confirmation-modal";
 import { useDeleteDevice } from "@/hooks/useDeleteDevice";
 
 export type DevicesTabProps = {
-  devices: Device[];
+  devices?: Device[];
   gatewaySerialNumber: string;
 };
 
@@ -101,7 +101,7 @@ const AddDevicesForm: React.FC<AddDevicesFormProps> = ({
 };
 
 const DevicesTab: React.FC<DevicesTabProps> = ({
-  devices,
+  devices = [],
   gatewaySerialNumber,
 }) => {
   const [selected, setSelected] = useState<Device | null>(null);

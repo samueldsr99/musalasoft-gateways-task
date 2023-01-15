@@ -6,11 +6,45 @@ import { useListGateways } from "@/hooks/useListGateways";
 import GatewaysTable from "./_gateways-table";
 import BaseLayout from "@/layouts/base";
 import { useUpdateGateway } from "@/hooks/useUpdateGateway";
+import type { Gateway } from "@/lib/types/gateway";
+
+const mockGateways: Gateway[] = [
+  {
+    id: "1",
+    serialNumber: "",
+    name: "",
+    address: "",
+    devices: [],
+  },
+  {
+    id: "2",
+    serialNumber: "",
+    name: "",
+    address: "",
+    devices: [],
+  },
+  {
+    id: "3",
+    serialNumber: "",
+    name: "",
+    address: "",
+    devices: [],
+  },
+  {
+    id: "4",
+    serialNumber: "",
+    name: "",
+    address: "",
+    devices: [],
+  },
+];
 
 const Gateways: React.FC = () => {
-  const { data: gateways } = useListGateways();
-  const { mutateAsync: deleteGateway } = useDeleteGateway();
-  const { mutateAsync: updateGateway } = useUpdateGateway();
+  const { data: gateways, isLoading, isRefetching } = useListGateways();
+  const { mutateAsync: deleteGateway, isLoading: isDeletingGateway } =
+    useDeleteGateway();
+  const { mutateAsync: updateGateway, isLoading: isUpdatingGateway } =
+    useUpdateGateway();
 
   return (
     <BaseLayout title="Gateways">
@@ -21,7 +55,10 @@ const Gateways: React.FC = () => {
       </div>
       <div className="mt-2 overflow-y-hidden overflow-x-scroll">
         <GatewaysTable
-          gateways={gateways}
+          isLoading={
+            isLoading || isRefetching || isDeletingGateway || isUpdatingGateway
+          }
+          gateways={gateways || mockGateways}
           onDelete={deleteGateway}
           onEdit={updateGateway}
         />

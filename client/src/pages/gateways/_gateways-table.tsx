@@ -21,6 +21,7 @@ export type GatewaysTableProps = {
   gateways?: Gateway[];
   onDelete?(serialNumber: string): Promise<unknown>;
   onEdit?(data: UpdateGatewayRequest): Promise<unknown>;
+  isLoading?: boolean;
 };
 
 type ConfirmActionsProps = {
@@ -38,13 +39,14 @@ type ActionsProps = {
 const ConfirmActions: React.FC<ConfirmActionsProps> = ({
   onCancel,
   submitting,
+  onSubmit,
 }) => {
   return (
     <>
       <IconButton variant="error" onClick={onCancel} submitting={submitting}>
         <XMarkIcon className="h-6 w-6" />
       </IconButton>
-      <IconButton variant="success" submitting={submitting} type="submit">
+      <IconButton variant="success" submitting={submitting} onClick={onSubmit}>
         <CheckIcon className="h-6 w-6" />
       </IconButton>
     </>
@@ -88,6 +90,7 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
   gateways = [],
   onDelete,
   onEdit,
+  isLoading = true,
 }) => {
   const [selected, setSelected] = useState<{
     gateway: Gateway;
@@ -97,6 +100,7 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
   const {
     getValues,
     setValue,
+    trigger,
     reset,
     handleSubmit,
     control,
@@ -104,7 +108,6 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
   } = useForm<UpdateFormProps>({
     resolver: zodResolver(updateGatewaySchema),
   });
-  console.log(selected);
 
   const handleSetAction = useCallback(
     (gateway: Gateway, action: "delete" | "edit") => () => {
@@ -149,7 +152,12 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <table className="min-w-full divide-y divide-gray-300">
+      <table
+        className={clsx(
+          "min-w-full divide-y divide-gray-300",
+          isLoading && "animate-pulse opacity-20"
+        )}
+      >
         <thead className="bg-zinc-400">
           <tr>
             <th
@@ -234,24 +242,34 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
                 )}
               </td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                {gateway.devices?.length ?? 0}
+                {gateway.devices?.length ?? ""}
               </td>
               <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <div className="flex justify-end gap-1">
-                  {selected?.gateway?.id === gateway.id ? (
-                    <ConfirmActions
-                      submitting={submitting}
-                      onCancel={handleCancelSubmit}
-                      onSubmit={handleSubmit((d) => void onSubmit(d))}
-                    />
-                  ) : (
-                    <Actions
-                      actionSetter={handleSetAction}
-                      submitting={submitting}
-                      gateway={gateway}
-                    />
-                  )}
-                </div>
+                {isLoading ? null : (
+                  <div className="flex justify-end gap-1">
+                    {selected?.gateway?.id === gateway.id ? (
+                      <ConfirmActions
+                        submitting={submitting}
+                        onCancel={handleCancelSubmit}
+                        onSubmit={async () => {
+                          const isValid = await trigger([
+                            "body.name",
+                            "body.address",
+                          ]);
+                          if (isValid) {
+                            void onSubmit(getValues());
+                          }
+                        }}
+                      />
+                    ) : (
+                      <Actions
+                        actionSetter={handleSetAction}
+                        submitting={submitting}
+                        gateway={gateway}
+                      />
+                    )}
+                  </div>
+                )}
               </td>
             </tr>
           ))}

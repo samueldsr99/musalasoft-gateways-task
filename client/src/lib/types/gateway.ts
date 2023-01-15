@@ -22,7 +22,7 @@ export const createGatewaySchema = z.object({
 export const updateGatewaySchema = z.object({
   serialNumber: z.string(),
   body: z.object({
-    name: z.string().optional(),
+    name: z.string().min(1).optional(),
     address: ipv4Schema.optional(),
   }),
 });

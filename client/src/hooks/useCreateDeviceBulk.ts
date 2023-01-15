@@ -13,5 +13,6 @@ export const useCreateDeviceBulk = () =>
       await queryClient.invalidateQueries(
         querykeys.readGateway(gatewaySerialNumber)
       );
+      await queryClient.invalidateQueries(querykeys.listGateways());
     },
   });

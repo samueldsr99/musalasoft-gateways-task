@@ -76,6 +76,16 @@ const Navbar: React.FC<NavbarProps> = ({ variant = "primary", className }) => {
       href: "/gateways",
       current: isCurrentPath("/gateways"),
     },
+    {
+      name: "Add Gateway",
+      href: "/gateways/new",
+      current: isCurrentPath("/gateways/new"),
+    },
+    {
+      name: "About",
+      href: "/about",
+      current: isCurrentPath("/about"),
+    },
   ] as NavbarItem[];
 
   return (

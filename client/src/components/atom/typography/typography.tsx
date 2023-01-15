@@ -17,7 +17,7 @@ export type TypographyProps = React.PropsWithChildren<{
 }>;
 
 const classes = clsx.bind({
-  root: "text-gray-800",
+  root: "text-gray-200",
   h1: "text-2xl md:text-3xl lg:text-4xl",
   h2: "text-xl md:text-2xl lg:text-3xl",
   h3: "text-lg md:text-xl lg:text-2xl",

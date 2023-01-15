@@ -1,75 +1,81 @@
-import React from "react";
+import clsx from "classnames";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { dehydrate, QueryClient } from "react-query";
 
-import querykeys from "../../../querykeys";
-import { readGateway } from "../../../lib/api/gateway";
 import { useReadGateway } from "../../../hooks/useReadGateway";
 import BaseLayout from "@/layouts/base";
+import DetailsTab from "./_details-tab";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import DevicesTab from "./_devices-tab";
+import type { Gateway } from "@/lib/types/gateway";
 
 type GatewayDetailsProps = {
   serialNumber: string;
   dehydratedState: object;
 };
 
-type DetailRowProps = {
-  title?: string;
-  value?: string | number;
+type TabsSectionProps = {
+  tab: "1" | "2";
+  gateway: Gateway;
 };
 
-const DetailRow: React.FC<DetailRowProps> = ({ title, value }) => {
+const TabsSection: React.FC<TabsSectionProps> = ({ gateway, tab }) => {
   return (
-    <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-      <dt className="text-sm font-medium text-gray-700">{title}</dt>
-      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-        {value}
-      </dd>
+    <div className="mb-8 flex gap-20 border-b border-b-gray-500">
+      <Link
+        href={`/gateways/${gateway.serialNumber}?tab=1`}
+        className={clsx(
+          "py-3 px-2.5 font-medium",
+          tab === "1" && "border-b-2 border-b-indigo-600 text-indigo-500"
+        )}
+      >
+        Details
+      </Link>
+      <Link
+        href={`/gateways/${gateway.serialNumber}?tab=2`}
+        className={clsx(
+          "py-3 px-2.5 font-medium",
+          tab === "2" && "border-b-2 border-b-indigo-600 text-indigo-500"
+        )}
+      >
+        Devices{" "}
+        {gateway.devices?.length > 0 ? (
+          <span className="ml-3 rounded-full bg-gray-800 py-0.5 px-2.5 text-xs md:inline-block">
+            {gateway?.devices?.length ?? 0}
+          </span>
+        ) : null}
+      </Link>
     </div>
   );
 };
 
 const GatewayDetails: NextPage<GatewayDetailsProps> = ({ serialNumber }) => {
   const { data: gateway } = useReadGateway(serialNumber);
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab") ?? "1";
+
+  if (!gateway) {
+    return null;
+  }
 
   return (
     <BaseLayout title="Details">
-      <div className="mx-auto max-w-4xl bg-zinc-400 sm:rounded-md">
-        <div className="px-4 py-5 sm:overflow-hidden sm:p-6">
-          <h3 className="text-xl font-medium leading-6 text-gray-900">
-            Gateway Details
-          </h3>
+      <div className="mx-auto max-w-4xl overflow-x-scroll">
+        <TabsSection tab={tab as "1" | "2"} gateway={gateway} />
+        <div className="">
+          {tab === "1" ? <DetailsTab gateway={gateway} /> : <DevicesTab />}
         </div>
-        <div className="border-t border-gray-500 px-4 py-5 sm:p-0">
-          <dl className="sm:divide-y sm:divide-gray-500">
-            <DetailRow title="Serial Number" value={gateway?.serialNumber} />
-            <DetailRow title="Name" value={gateway?.name} />
-            <DetailRow title="IPV4 Address" value={gateway?.address} />
-            <DetailRow title="Devices" value={gateway?.devices?.length} />
-          </dl>
-        </div>
-      </div>
-
-      <div className="">
-        {gateway?.devices?.map((device) => (
-          <div key={device.uuid}>A device</div>
-        ))}
       </div>
     </BaseLayout>
   );
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = (ctx) => {
   const serialNumber = ctx.params?.serialNumber as string;
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(querykeys.readGateway(serialNumber), () =>
-    readGateway(serialNumber)
-  );
 
   return {
     props: {
       serialNumber,
-      dehydratedState: dehydrate(queryClient),
     },
   };
 };

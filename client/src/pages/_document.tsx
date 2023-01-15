@@ -4,7 +4,6 @@ const Document = () => {
   return (
     <Html>
       <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

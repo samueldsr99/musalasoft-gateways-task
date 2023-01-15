@@ -23,6 +23,7 @@ export const createGatewaySchema = z.object({
           status: deviceStatusSchema,
         })
       )
+      .max(10)
       .default([]),
   }),
 });

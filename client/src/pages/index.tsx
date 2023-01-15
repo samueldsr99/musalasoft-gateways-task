@@ -12,9 +12,9 @@ const Home: NextPage = () => {
         <Navbar />
       </header>
       <main className="px-8 pt-20 sm:px-20">
-        <Typography as="h1" weight="bold" size="5xl" align="center">
+        <h1 className="text-center text-5xl font-extrabold">
           Gateways management
-        </Typography>
+        </h1>
         <div className="mx-auto mt-20 flex max-w-sm flex-col gap-8">
           <Link href="/gateways">
             <Button className="w-full" size="xl" textCentered>

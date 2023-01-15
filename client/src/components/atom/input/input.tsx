@@ -5,6 +5,7 @@ export type InputProps = JSX.IntrinsicElements["input"] & {
   variant?: "primary" | "secondary";
   isError?: boolean;
   sz?: "sm" | "md";
+  enableEnterSubmit?: boolean;
 };
 
 const classes = clsx.bind({
@@ -18,13 +19,25 @@ const classes = clsx.bind({
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, variant = "primary", isError = false, sz = "md", ...props },
+    {
+      className,
+      variant = "primary",
+      isError = false,
+      sz = "md",
+      enableEnterSubmit = true,
+      ...props
+    },
     ref
   ) => {
     return (
       <input
         ref={ref}
         className={classes("root", variant, isError && "error", sz, className)}
+        onKeyDown={(e) => {
+          if (!enableEnterSubmit && e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
         {...props}
       />
     );

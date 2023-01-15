@@ -19,6 +19,16 @@ export const createGatewaySchema = z.object({
   devices: z.array(createDeviceSchema).default([]),
 });
 
+export const updateGatewaySchema = z.object({
+  serialNumber: z.string(),
+  body: z.object({
+    name: z.string().optional(),
+    address: ipv4Schema.optional(),
+  }),
+});
+
 export type Gateway = z.infer<typeof gatewaySchema>;
 
 export type CreateGatewayRequest = z.infer<typeof createGatewaySchema>;
+
+export type UpdateGatewayRequest = z.infer<typeof updateGatewaySchema>;

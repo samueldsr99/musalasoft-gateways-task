@@ -5,10 +5,12 @@ import { useDeleteGateway } from "@/hooks/useDeleteGateway";
 import { useListGateways } from "@/hooks/useListGateways";
 import GatewaysTable from "./_gateways-table";
 import BaseLayout from "@/layouts/base";
+import { useUpdateGateway } from "@/hooks/useUpdateGateway";
 
 const Gateways: React.FC = () => {
   const { data: gateways } = useListGateways();
   const { mutateAsync: deleteGateway } = useDeleteGateway();
+  const { mutateAsync: updateGateway } = useUpdateGateway();
 
   return (
     <BaseLayout title="Gateways">
@@ -18,7 +20,11 @@ const Gateways: React.FC = () => {
         </Link>
       </div>
       <div className="mt-2 overflow-y-hidden overflow-x-scroll">
-        <GatewaysTable gateways={gateways} onDelete={deleteGateway} />
+        <GatewaysTable
+          gateways={gateways}
+          onDelete={deleteGateway}
+          onEdit={updateGateway}
+        />
       </div>
     </BaseLayout>
   );

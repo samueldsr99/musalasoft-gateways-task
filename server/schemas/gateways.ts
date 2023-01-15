@@ -27,6 +27,16 @@ export const createGatewaySchema = z.object({
   }),
 });
 
+export const patchGatewaySchema = z.object({
+  params: z.object({
+    serialNumber: z.string(),
+  }),
+  body: z.object({
+    name: z.string().optional(),
+    address: ipv4Schema.optional(),
+  }),
+});
+
 export const deleteGatewaySchema = z.object({
   params: z.object({
     serialNumber: z.string(),

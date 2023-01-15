@@ -14,8 +14,8 @@ export type ButtonProps = JSX.IntrinsicElements["button"] & {
 const classes = clsx.bind({
   root: "rounded-md font-semibold border-none",
   animated: "transition-shadow hover:shadow-xl active:opacity-90",
-  primary: "text-slate-400 bg-gray-800 border border-gray-600",
-  secondary: "text-slate-900 bg-gray-300",
+  primary: "text-slate-100 bg-zinc-800 border border-zinc-600",
+  secondary: "text-slate-900 bg-zinc-300",
   disabled: "opacity-70",
   sm: "py-1 px-2",
   md: "py-2 px-4",
@@ -45,6 +45,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled && "disabled",
         className
       )}
+      disabled={disabled}
       {...props}
     >
       <div

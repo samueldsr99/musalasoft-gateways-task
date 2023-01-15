@@ -10,6 +10,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     const gateway = await prisma.gateway.findUnique({
       where: { serialNumber },
+      include: {
+        devices: true,
+      },
     });
     if (!gateway) {
       return notFound(res, GATEWAY_NOT_FOUND(serialNumber));

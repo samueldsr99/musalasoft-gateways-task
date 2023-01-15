@@ -4,6 +4,7 @@ export type TypographyProps = React.PropsWithChildren<{
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span" | "pre";
   align?: "left" | "center";
   weight?:
+    | "extrabold"
     | "bold"
     | "semibold"
     | "medium"
@@ -16,7 +17,7 @@ export type TypographyProps = React.PropsWithChildren<{
 }>;
 
 const classes = clsx.bind({
-  root: "",
+  root: "text-gray-800",
   h1: "text-2xl md:text-3xl lg:text-4xl",
   h2: "text-xl md:text-2xl lg:text-3xl",
   h3: "text-lg md:text-xl lg:text-2xl",

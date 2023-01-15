@@ -9,6 +9,13 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        layout:
+          "url(https://ping.gg/_next/static/media/background.d5ba1ba2.svg)",
+      },
+      backgroundSize: {
+        landing: "120rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],

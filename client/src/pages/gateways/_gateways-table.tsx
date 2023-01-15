@@ -1,4 +1,5 @@
 import { memo, useCallback, useState } from "react";
+import clsx from "classnames";
 import {
   CheckIcon,
   EyeIcon,
@@ -73,7 +74,7 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
 
   return (
     <table className="min-w-full divide-y divide-gray-300">
-      <thead className="bg-gray-50">
+      <thead className="bg-zinc-400">
         <tr>
           <th
             scope="col"
@@ -105,8 +106,11 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 bg-white">
-        {gateways?.map((gateway) => (
-          <tr key={gateway.id}>
+        {gateways?.map((gateway, index) => (
+          <tr
+            key={gateway.id}
+            className={clsx(index % 2 === 0 ? "bg-zinc-100" : "bg-zinc-200")}
+          >
             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
               {isEditing(gateway) ? <Input /> : gateway.serialNumber}
             </td>
@@ -154,7 +158,6 @@ const GatewaysTable: React.FC<GatewaysTableProps> = ({
                     >
                       <PencilSquareIcon className="h-6 w-6" />
                     </IconButton>
-
                     <IconButton variant="info" submitting={submitting}>
                       <Link href={`/gateways/${gateway.serialNumber}`}>
                         <EyeIcon className="h-6 w-6" />

@@ -18,7 +18,7 @@ const Toggle: React.FC<ToggleProps> = ({
       defaultChecked={defaultChecked}
       onChange={onChange}
       className={clsx(
-        checked ? "bg-green-600" : "bg-gray-200",
+        checked ? "bg-slate-600" : "bg-slate-200",
         "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none"
       )}
     >
@@ -39,7 +39,7 @@ const Toggle: React.FC<ToggleProps> = ({
           aria-hidden="true"
         >
           <svg
-            className="h-3 w-3 text-gray-400"
+            className="h-3 w-3 text-slate-400"
             fill="none"
             viewBox="0 0 12 12"
           >
@@ -62,7 +62,7 @@ const Toggle: React.FC<ToggleProps> = ({
           aria-hidden="true"
         >
           <svg
-            className="h-3 w-3 text-green-600"
+            className="h-3 w-3 text-slate-600"
             fill="currentColor"
             viewBox="0 0 12 12"
           >

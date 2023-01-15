@@ -7,11 +7,13 @@ import type { ChangeEvent } from "react";
 export type DeviceCardProps = {
   device?: Partial<Device>;
   isEditing?: boolean;
+  vendorError?: string;
   onChange?(newDevice: Partial<Device>): void;
 };
 
 const DeviceCard: React.FC<DeviceCardProps> = ({
   device,
+  vendorError,
   isEditing = false,
   onChange,
 }) => {
@@ -38,20 +40,24 @@ const DeviceCard: React.FC<DeviceCardProps> = ({
   };
 
   return (
-    <div className="w-full cursor-pointer rounded-lg border px-4 py-2.5 transition-shadow duration-200 hover:shadow-md">
+    <div className="w-full cursor-pointer rounded-lg border-2 border-zinc-500 bg-transparent px-4 pt-2 pb-2.5 transition-shadow duration-200 hover:shadow-md">
       <div className="flex items-center justify-between gap-4">
         {isEditing ? (
-          <Input
-            placeholder="Vendor"
-            value={device?.vendor ?? ""}
-            onChange={handleChangeVendor}
-          />
+          <div>
+            <Input
+              placeholder="vendor"
+              value={device?.vendor ?? ""}
+              onChange={handleChangeVendor}
+              isError={!!vendorError}
+            />
+            <p className="text-sm text-red-500">{vendorError}</p>
+          </div>
         ) : (
           <Typography as="p">{device?.vendor}</Typography>
         )}
         {isEditing ? (
           <div>
-            <h1 className="text-sm text-gray-400">Status</h1>
+            <h1 className="text-sm text-gray-800">Status</h1>
             <Toggle
               checked={device?.status === "online"}
               onChange={handleChangeStatus}

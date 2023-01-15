@@ -104,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ variant = "primary", className }) => {
               </div>
 
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <Link className="" href="/">
+                <Link className="inline-flex items-center" href="/">
                   <Logo />
                 </Link>
                 <div className="hidden sm:ml-6 sm:block">

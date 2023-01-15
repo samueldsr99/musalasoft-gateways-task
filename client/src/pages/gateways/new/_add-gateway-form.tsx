@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import AddMoreButton from "@/components/add-more-button";
-import Typography from "@/components/atom/typography";
 import IconButton from "@/components/icon-button";
 import DeviceInput from "@/components/device-input";
 import Label from "@/components/atom/label";
@@ -58,9 +57,7 @@ const AddGatewayForm = () => {
     <form className="mx-auto max-w-4xl" onSubmit={handleSubmit(onSubmit)}>
       <div className="sm:overflow-hidden sm:rounded-md">
         <div className="space-y-6 bg-zinc-400 px-4 py-5 sm:p-6">
-          <Typography as="h2" size="xl" weight="extrabold">
-            Details
-          </Typography>
+          <h2 className="text-xl font-bold">Details</h2>
           <FormControl>
             <Label htmlFor="name">Gateway name*</Label>
             <Controller
@@ -92,9 +89,7 @@ const AddGatewayForm = () => {
             )}
           </FormControl>
           <div className="mt-8 flex flex-col gap-2">
-            <Typography as="h2" size="xl">
-              Devices
-            </Typography>
+            <h2 className="text-xl font-bold">Devices</h2>
             {fields.map((field, index) => (
               <Controller
                 key={field.id}

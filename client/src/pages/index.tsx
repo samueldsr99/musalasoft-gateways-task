@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 
 import Button from "@/components/atom/button";
-import Typography from "@/components/atom/typography";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
 

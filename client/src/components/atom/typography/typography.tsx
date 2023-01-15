@@ -13,16 +13,27 @@ export type TypographyProps = React.PropsWithChildren<{
     | "regular"
     | "light";
   className?: string;
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  size?:
+    | "xs"
+    | "sm"
+    | "md"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "3xl"
+    | "4xl"
+    | "5xl"
+    | "6xl"
+    | "7xl";
 }>;
 
 const classes = clsx.bind({
   root: "text-gray-200",
-  h1: "text-2xl md:text-3xl lg:text-4xl",
-  h2: "text-xl md:text-2xl lg:text-3xl",
-  h3: "text-lg md:text-xl lg:text-2xl",
-  h4: "text-md md:text-lg lg:text-xl",
-  h5: "text-sm md:text-md lg:text-lg",
+  // h1: "text-2xl md:text-3xl lg:text-4xl",
+  // h2: "text-xl md:text-2xl lg:text-3xl",
+  // h3: "text-lg md:text-xl lg:text-2xl",
+  // h4: "text-md md:text-lg lg:text-xl",
+  // h5: "text-sm md:text-md lg:text-lg",
   p: "text-md lg:text-lg",
   span: "",
   pre: "",

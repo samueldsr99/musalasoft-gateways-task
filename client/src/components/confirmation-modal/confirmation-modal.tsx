@@ -1,15 +1,8 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import clsx from "classnames/bind";
 
 import Button from "@/components/atom/button";
-
-const classes = clsx.bind({
-  root: "",
-  error: "",
-  success: "",
-});
 
 export type ConfirmationModalProps = {
   open?: boolean;
@@ -82,7 +75,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 flex flex-col gap-2 sm:mt-4 sm:flex-row sm:flex-row-reverse">
+                <div className="mt-5 flex flex-col gap-2 sm:mt-4 sm:flex-row-reverse">
                   <Button
                     className="w-full sm:w-auto"
                     type="button"

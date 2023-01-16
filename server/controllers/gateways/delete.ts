@@ -8,12 +8,17 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { serialNumber } = req.params;
 
+    const count = await prisma.gateway.count({
+      where: { serialNumber },
+    });
+    if (!count) {
+      return notFound(res, GATEWAY_NOT_FOUND(serialNumber));
+    }
+
     const result = await prisma.gateway.delete({
       where: { serialNumber },
     });
-    if (!result) {
-      return notFound(res, GATEWAY_NOT_FOUND(serialNumber));
-    }
+
     return res.json(result);
   } catch (err) {
     return next(err);

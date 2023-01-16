@@ -7,7 +7,8 @@
     "dev": "next dev",
     "deploy": "vercel deploy --prod",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test": "echo \"No Tests!\""
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",

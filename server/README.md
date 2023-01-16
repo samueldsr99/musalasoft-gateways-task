@@ -60,3 +60,7 @@ yarn run deploy
 
 pnpm run deploy
 ```
+
+## API documentation
+
+You can check the API docs as a postman collection in [here](./Musala.postman_collection.json).

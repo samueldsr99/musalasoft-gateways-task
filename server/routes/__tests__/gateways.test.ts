@@ -4,6 +4,10 @@ import app from "../../app";
 import prisma from "../../config/prisma";
 import { mockCreateGatewayRequests } from "../../mock-data/gateways";
 
+beforeAll(async () => {
+  await prisma.$connect();
+});
+
 describe("GET /gateways", () => {
   it("Should retrieve gateways", async () => {
     await request(app).get("/gateways").expect(200);
@@ -87,8 +91,4 @@ describe("DELETE /gateways", () => {
   it("Should delete a gateway", async () => {
     await request(app).delete(`/gateways/${serialNumber}`).expect(200);
   });
-});
-
-afterAll(async () => {
-  await prisma.gateway.deleteMany({});
 });

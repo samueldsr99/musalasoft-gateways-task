@@ -6,4 +6,5 @@ module.exports = {
   coverageProvider: "v8",
   modulePathIgnorePatterns: ["./dist/"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json", "node"],
+  globalTeardown: "<rootDir>/test-utils/tear-down.ts",
 };

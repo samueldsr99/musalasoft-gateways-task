@@ -2,6 +2,7 @@ name: Vercel Client Production Deployment
 env:
   VERCEL_CLIENT_ORG_ID: ${{ secrets.VERCEL_CLIENT_ORG_ID }}
   VERCEL_CLIENT_PROJECT_ID: ${{ secrets.VERCEL_CLIENT_PROJECT_ID }}
+  NEXT_PUBLIC_API_URL: https://musala-gateways-server.vercel.app
 on:
   push:
     branches:

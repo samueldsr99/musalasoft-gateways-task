@@ -32,6 +32,8 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Install Dependencies
+        run: pnpm install
       - name: Run tests
         run: pnpm test
       - name: Deploy Project Artifacts to Vercel

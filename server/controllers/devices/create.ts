@@ -10,7 +10,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
       params: { serialNumber },
-      body: { status, uuid, vendor },
+      body: { status, vendor },
     } = await zParse(createDeviceSchema, req);
 
     const gateway = await prisma.gateway.findUnique({
@@ -22,7 +22,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     const device = await prisma.device.create({
       data: {
-        ...(uuid && { uuid }),
         vendor,
         status,
         gatewayId: gateway.id,

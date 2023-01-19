@@ -15,10 +15,6 @@ const DeviceInput: React.FC<DeviceInputProps> = ({
   onChange,
 }) => {
   const handleChangeVendor = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log({
-      ...device,
-      vendor: e.target.value,
-    });
     onChange?.({
       ...device,
       vendor: e.target.value,
@@ -26,10 +22,6 @@ const DeviceInput: React.FC<DeviceInputProps> = ({
   };
 
   const handleChangeStatus = (e: boolean) => {
-    console.log({
-      ...device,
-      status: e ? "online" : "offline",
-    });
     onChange?.({
       ...device,
       status: e ? "online" : "offline",

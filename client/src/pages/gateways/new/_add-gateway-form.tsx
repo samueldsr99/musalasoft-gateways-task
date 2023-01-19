@@ -46,7 +46,6 @@ const AddGatewayForm = () => {
   const canAddMore = useMemo(() => {
     return fields.length < 10;
   }, [fields.length]);
-  console.log({ canAddMore });
 
   const onSubmit: SubmitHandler<FormProps> = async (data) => {
     await mutateAsync(data);

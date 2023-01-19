@@ -1,18 +1,17 @@
 import clsx from "classnames";
-import type { GetStaticPaths, NextPage } from "next";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import { useReadGateway } from "../../../hooks/useReadGateway";
 import BaseLayout from "@/layouts/base";
-import DetailsTab from "./_details-tab";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import DevicesTab from "./_devices-tab";
 import type { Gateway } from "@/lib/types/gateway";
+import DetailsTab from "./_details-tab";
+import DevicesTab from "./_devices-tab";
 
 type GatewayDetailsProps = {
   serialNumber: string;
-  dehydratedState: object;
 };
 
 type TabsSectionProps = {

@@ -1,5 +1,6 @@
 import clsx from "classnames";
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticPaths, NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { useReadGateway } from "../../../hooks/useReadGateway";
 import BaseLayout from "@/layouts/base";
@@ -49,8 +50,12 @@ const TabsSection: React.FC<TabsSectionProps> = ({ gateway, tab }) => {
   );
 };
 
-const GatewayDetails: NextPage<GatewayDetailsProps> = ({ serialNumber }) => {
-  const { data: gateway } = useReadGateway(serialNumber);
+const GatewayDetails: NextPage<GatewayDetailsProps> = () => {
+  const router = useRouter();
+  const { serialNumber = null } = router.query;
+  const { data: gateway } = useReadGateway(serialNumber as string, {
+    enabled: !!serialNumber,
+  });
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab") ?? "1";
 
@@ -75,23 +80,6 @@ const GatewayDetails: NextPage<GatewayDetailsProps> = ({ serialNumber }) => {
       </div>
     </BaseLayout>
   );
-};
-
-export const getStaticProps: GetStaticProps = (ctx) => {
-  const serialNumber = ctx.params?.serialNumber as string;
-
-  return {
-    props: {
-      serialNumber,
-    },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
 };
 
 export default GatewayDetails;
